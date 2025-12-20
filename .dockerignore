@@ -1,0 +1,50 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+.env
+.env.local
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker
+Dockerfile
+Dockerfile.*
+docker-compose*.yml
+.dockerignore
+
+# Data (handled by volumes)
+data/
+
+# Frontend (handled by its own build)
+frontend/
+node_modules/
+
+# Documentation
+*.md
+!README.md
+
+# Tests
+tests/
+pytest.ini
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db

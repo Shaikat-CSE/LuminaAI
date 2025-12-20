@@ -1,0 +1,7 @@
+{
+  "name": "LuminaAI",
+  "description": "A sophisticated RAG-enabled chatbot with dynamic liquid glass navigation and advanced document processing capabilities.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

@@ -1,0 +1,44 @@
+version: '3.8'
+
+# Development configuration with hot reload for both services
+services:
+  # Backend API (FastAPI) with hot reload
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lumina-ai-api-dev
+    ports:
+      - "9000:8000"
+    env_file:
+      - .env
+    environment:
+      - PYTHONPATH=/app
+    volumes:
+      - lumina_ai_data_dev:/app/data
+      - ./app:/app/app
+    command: [ "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload" ]
+    restart: unless-stopped
+
+  # Frontend UI (Vite) with hot reload
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: lumina-ai-frontend-dev
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=${VITE_API_URL:-http://localhost:9000/api/v1}
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  lumina_ai_data_dev:
+    driver: local
